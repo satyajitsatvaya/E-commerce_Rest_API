@@ -1,9 +1,7 @@
 package com.Satya.SpringBoot.Projects.Ecommerce.Rest.API.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,19 +26,20 @@ public class Products {
     private String brand;
     private BigDecimal price;
     private String category;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-YYYY")
     private Date releaseDate;
     private boolean productAvailable;
     private int stockQuantity;
+    private String imageName;
+    private String imageType;
+    @Lob
+    private byte[] imageData;
 
-    public Products(String name, String description, String brand, BigDecimal price, String category, Date releaseDate, boolean productAvailable, int stockQuantity) {
-        this.name = name;
-        this.description = description;
-        this.brand = brand;
-        this.price = price;
-        this.category = category;
-        this.releaseDate = releaseDate;
-        this.productAvailable = productAvailable;
-        this.stockQuantity = stockQuantity;
+
+
+    public Products(int id){
+        this.id=id;
     }
 
 
