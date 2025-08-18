@@ -1,17 +1,13 @@
 package com.Satya.SpringBoot.Projects.Ecommerce.Rest.API.Service;
 
-import com.Satya.SpringBoot.Projects.Ecommerce.Rest.API.Model.Products;
+import com.Satya.SpringBoot.Projects.Ecommerce.Rest.API.Model.Product;
 import com.Satya.SpringBoot.Projects.Ecommerce.Rest.API.Repository.Repo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -19,11 +15,11 @@ public class ProductService {
     @Autowired
     private Repo repo;
 
-    public List<Products> showAll() {
+    public List<Product> showAll() {
         return repo.findAll();
     }
 
-    public Products addProduct(Products product, MultipartFile image) throws IOException {
+    public Product saveOrUpdate(Product product, MultipartFile image) throws IOException {
         product.setImageName(image.getOriginalFilename());
         product.setImageType(image.getContentType());
         product.setImageData(image.getBytes());
@@ -35,9 +31,6 @@ public class ProductService {
         repo.deleteById(id);
     }
 
-    public Products updateProduct(Products product) {
-        return repo.save(product);
-    }
 
 //    public void load() {
 //        List<Products> products = new ArrayList<>(List.of(
@@ -53,12 +46,16 @@ public class ProductService {
 
 
 
-    public Products getProduct(int id) {
-        return repo.findById(id).orElse(new Products(-1));
+    public Product getProduct(int id) {
+        return repo.findById(id).orElse(new Product(-1));
     }
 
 
     public void deleteAll() {
         repo.deleteAll();
+    }
+
+    public List<Product> searchProducts(String keyword) {
+        return repo.searchProducts(keyword);
     }
 }

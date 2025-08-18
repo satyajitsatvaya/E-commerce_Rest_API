@@ -16,7 +16,7 @@ import java.util.Date;
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
-public class Products {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +38,7 @@ public class Products {
 
 
 
-    public Products(int id){
+    public Product(int id){
         this.id=id;
     }
 
